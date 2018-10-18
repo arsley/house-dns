@@ -1,7 +1,13 @@
-#! /usr/bin/env ruby
+require 'bundler/inline'
 
-require 'bundler'
-Bundler.require
+Process.daemon
+
+gemfile do
+  source "https://rubygems.org"
+  gem 'rubydns'
+end
+
+puts 'Install success'
 
 INTERFACES = [
   [:udp, '0.0.0.0', 5300],
@@ -14,6 +20,8 @@ UPSTREAM = RubyDNS::Resolver.new([
   [:udp, '8.8.8.8', 53],
   [:tcp, '8.8.8.8', 53],
 ])
+
+puts 'On serve'
 
 RubyDNS::run_server(INTERFACES) do
   match(%{test.local}, IN::A) do |transaction|

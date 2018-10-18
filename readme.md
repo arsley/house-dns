@@ -5,5 +5,6 @@ My DNS server with `rubydns` on Raspberry Pi(test).
 ## Usage
 
 ```
-$ RUBYOPT=-w ./house-dns.rb
+# creates daemon
+$ ruby house-dns.rb
 ```
